@@ -49,7 +49,6 @@ public class VisionActivity extends AppCompatActivity{
             super.onPostExecute(result);
         }
     }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
@@ -65,7 +64,5 @@ public class VisionActivity extends AppCompatActivity{
         return true;
         //return super.onKeyDown(keyCode, event);
     }
-
-
 
 }

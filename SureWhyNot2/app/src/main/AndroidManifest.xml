@@ -19,6 +19,7 @@
         android:required="true" />
 
     <application
+        android:name=".beaconApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -35,8 +36,6 @@
         <activity
             android:name=".waitingBeaconActivity"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name=".Choice"
             android:screenOrientation="portrait" />

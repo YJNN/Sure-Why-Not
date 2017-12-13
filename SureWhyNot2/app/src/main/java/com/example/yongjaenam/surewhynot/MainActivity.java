@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mTextString = new String[]{A};
         mNaverTTSTask = new NaverTTSTask();
         mNaverTTSTask.execute(mTextString);
-
     }
 
     private class NaverTTSTask extends AsyncTask<String[], Void, String> {
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         mConditionRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,21 +73,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float axisX = event.values[0];
             float axisY = event.values[1];
             float axisZ = event.values[2];
 
-            float gravityX=axisX / SensorManager.GRAVITY_EARTH;
-            float gravityY=axisY / SensorManager.GRAVITY_EARTH;
-            float gravityZ=axisZ / SensorManager.GRAVITY_EARTH;
+            float gravityX = axisX / SensorManager.GRAVITY_EARTH;
+            float gravityY = axisY / SensorManager.GRAVITY_EARTH;
+            float gravityZ = axisZ / SensorManager.GRAVITY_EARTH;
 
-            Float f = gravityX*gravityX + gravityY*gravityY + gravityZ*gravityZ;
+            Float f = gravityX * gravityX + gravityY * gravityY + gravityZ * gravityZ;
             double squareD = Math.sqrt(f.doubleValue());
             float gForce = (float) squareD;
-            if(gForce>SHAKE_THRESHOLD_GRAVITY){
+            if (gForce > SHAKE_THRESHOLD_GRAVITY) {
                 long currentTime = System.currentTimeMillis();
-                if(mShakeTime+SHAKE_SKIP_TIME > currentTime){
+                if (mShakeTime + SHAKE_SKIP_TIME > currentTime) {
                     return;
                 }
                 mShakeTime = currentTime;
@@ -100,18 +99,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         }
     }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
     }
-}
+}//
