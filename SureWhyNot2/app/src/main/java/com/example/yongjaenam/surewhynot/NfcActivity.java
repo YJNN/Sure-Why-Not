@@ -51,13 +51,10 @@ public class NfcActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfcactivity);
-
       //  etText = (EditText) findViewById(R.id.et_text);
       //  btTTS = (Button) findViewById(R.id.bt_tts);
       //  btReset = (Button) findViewById(R.id.bt_reset);
-
         String A = "NFC태그 모드입니다. 상품대에 있는 태그에 핸드폰을 찍어주세요.";
-
 
         mTextString = new String[]{A};
         mNaverTTSTask = new NaverTTSTask();

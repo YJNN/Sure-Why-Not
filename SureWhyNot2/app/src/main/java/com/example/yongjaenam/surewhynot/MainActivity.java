@@ -1,4 +1,4 @@
-﻿package com.example.yongjaenam.surewhynot;
+package com.example.yongjaenam.surewhynot;
 
 import android.content.Intent;
 import android.hardware.Sensor;
