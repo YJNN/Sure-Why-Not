@@ -15,7 +15,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 // 네이버 음성합성 Open API 예제
-//아주 아주 아주 중요!!!! 네트워크 접속을 사용시 AsyncTask(즉 쓰레드)를 사용해야 한다. 아 미쳐~
+//네트워크 접속을 사용시 AsyncTask(즉 쓰레드)를 사용해야함.
 
 public class APIExamTTS {
 
@@ -36,7 +36,7 @@ public class APIExamTTS {
             String postParams = "speaker=jinho&speed=2&text=" + text;
             con.setDoOutput(true);
             con.setDoInput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());///여기서 에러 난다?
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             Log.d(TAG, String.valueOf(wr));
             wr.writeBytes(postParams);
             wr.flush();
@@ -54,7 +54,7 @@ public class APIExamTTS {
                 }
                 // 랜덤한 이름으로 mp3 파일 생성
                 //String tempname = Long.valueOf(new Date().getTime()).toString();
-                String tempname = "naverttstemp"; //하나의 파일명으로 덮어쓰기 하자.
+                String tempname = "naverttstemp"; //하나의 파일명으로 덮어쓰기
                 File f = new File(adress + File.separator + "Naver/" + tempname + ".mp3");
                 f.createNewFile();
                 OutputStream outputStream = new FileOutputStream(f);
@@ -66,7 +66,7 @@ public class APIExamTTS {
                 String Path_to_file = adress+File.separator+"Naver/"+tempname+".mp3";
                 MediaPlayer audioPlay = new MediaPlayer();
                 audioPlay.setDataSource(Path_to_file);
-                audioPlay.prepare();//이걸 해줘야 하는군. 없으면 에러난다.
+                audioPlay.prepare();//없으면 에러
                 audioPlay.start();
 
 
