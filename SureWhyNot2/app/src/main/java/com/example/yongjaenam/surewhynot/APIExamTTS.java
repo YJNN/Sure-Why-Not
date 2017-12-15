@@ -1,4 +1,4 @@
-﻿package com.example.yongjaenam.surewhynot;
+package com.example.yongjaenam.surewhynot;
 
 import android.media.MediaPlayer;
 import android.util.Log;
