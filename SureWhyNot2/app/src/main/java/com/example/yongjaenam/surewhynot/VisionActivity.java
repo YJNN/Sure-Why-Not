@@ -1,7 +1,5 @@
-package com.example.yongjaenam.surewhynot;
+﻿package com.example.yongjaenam.surewhynot;
 
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -10,13 +8,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -112,6 +107,8 @@ public class VisionActivity extends AppCompatActivity {
 
     private TextView mImageDetails;
     private ImageView mMainImage;
+    private NaverTTSTask mNaverTTSTask;
+    String[] mTextString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +117,7 @@ public class VisionActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,15 +134,15 @@ public class VisionActivity extends AppCompatActivity {
                         .setNegativeButton(R.string.dialog_select_camera, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                startCamera();
                             }
                         });
                 builder.create().show();
             }
-        });
+        });*/
 
         mImageDetails = (TextView) findViewById(R.id.image_details);
         mMainImage = (ImageView) findViewById(R.id.main_image);
+        startCamera();
     }
 
     public void startGalleryChooser() {
@@ -301,6 +299,7 @@ public class VisionActivity extends AppCompatActivity {
                     Log.d(TAG, "created Cloud Vision request object, sending request");
 
                     BatchAnnotateImagesResponse response = annotateRequest.execute();
+
                     return convertResponseToString(response);
 
                 } catch (GoogleJsonResponseException e) {
@@ -313,7 +312,8 @@ public class VisionActivity extends AppCompatActivity {
             }
 
             protected void onPostExecute(String result) {
-                mImageDetails.setText(result);
+                //mImageDetails.setText(result);  //받아온 string message 화면에 출력해주는거. 현재 굳이 필요없음.
+                startCamera();
             }
         }.execute();
     }
@@ -344,15 +344,44 @@ public class VisionActivity extends AppCompatActivity {
         List<EntityAnnotation> labels = response.getResponses().get(0).getLabelAnnotations();
 
         if (labels != null) {
-            for (EntityAnnotation label : labels) {
-                message += String.format(Locale.US, "%.3f: %s", label.getScore(), label.getDescription());
-                message += "\n";
-            }
+           for (EntityAnnotation label : labels) {
+               //message += String.format(Locale.US, "%.3f: %s", label.getScore(), label.getDescription());
+               //message += "\n";
+               message += String.format(Locale.US, "%s", label.getDescription());
+           }
         } else {
             message += "nothing";
+        }
+
+        //테스트용
+        if(message.contains("drink")){
+            String A ="커피입니다";
+            mTextString = new String[]{A};
+            mNaverTTSTask = new NaverTTSTask();
+            mNaverTTSTask.execute(mTextString);
+        }
+        else{
+            String B ="해당 상품을 찾을 수 없습니다";
+            mTextString = new String[]{B};
+            mNaverTTSTask = new NaverTTSTask();
+            mNaverTTSTask.execute(mTextString);
         }
 
         return message;
     }
 
+    private class NaverTTSTask extends AsyncTask<String[], Void, String> {
+
+        @Override
+        protected String doInBackground(String[]... strings) {
+            //여기서 서버에 요청
+            APIExamTTS.main(mTextString, getFilesDir());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
+    }
 }
