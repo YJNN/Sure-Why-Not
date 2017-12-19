@@ -354,18 +354,6 @@ public class VisionActivity extends AppCompatActivity {
         }
 
         //테스트용
-        if(message.contains("drink")){
-            String A ="커피입니다";
-            mTextString = new String[]{A};
-            mNaverTTSTask = new NaverTTSTask();
-            mNaverTTSTask.execute(mTextString);
-        }
-        else{
-            String B ="해당 상품을 찾을 수 없습니다";
-            mTextString = new String[]{B};
-            mNaverTTSTask = new NaverTTSTask();
-            mNaverTTSTask.execute(mTextString);
-        }
 
         return message;
     }
