@@ -94,7 +94,7 @@ public class VisionActivity extends AppCompatActivity {
         return true;
         //return super.onKeyDown(keyCode, event);
     }*/
-    private static final String CLOUD_VISION_API_KEY = "AIzaSyDF7nzYrlL87P5xAI7i2h5KQzLrRGt4qf4";
+    private static final String CLOUD_VISION_API_KEY = //"구글 Vision 인증키입력하기";
     public static final String FILE_NAME = "temp.jpg";
     private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
     private static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
