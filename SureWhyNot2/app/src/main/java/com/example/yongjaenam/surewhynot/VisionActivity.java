@@ -39,62 +39,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class VisionActivity extends AppCompatActivity {
-    /*
-    ImageView ivv;
-    int cnt=0;
-    String sss=null;
-    private NaverTTSTask mNaverTTSTask;
-    String[] mTextString;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.vision);
-        ivv = (ImageView) findViewById(R.id.HI);
-        sss = "상품을 카메라로 찍어주십쇼. 볼륨 버튼을 누르면 상품이 찍힙니다.";
-        mTextString = new String[]{sss};
-        mNaverTTSTask = new NaverTTSTask();
-        mNaverTTSTask.execute(mTextString);
-        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),1);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        ivv.setImageURI(data.getData());
-
-        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),1);
-    }
-
-    private class NaverTTSTask extends AsyncTask<String[], Void, String> {
-
-        @Override
-        protected String doInBackground(String[]... strings) {
-            //여기서 서버에 요청
-            APIExamTTS.main(mTextString, getFilesDir());
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-        }
-    }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-        } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-
-
-        }else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-
-        }
-
-        return true;
-        //return super.onKeyDown(keyCode, event);
-    }*/
-    private static final String CLOUD_VISION_API_KEY = //"구글 Vision 인증키입력하기";
+    private static final String CLOUD_VISION_API_KEY = "";
     public static final String FILE_NAME = "temp.jpg";
     private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
     private static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
@@ -116,30 +61,6 @@ public class VisionActivity extends AppCompatActivity {
         setContentView(R.layout.vision);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(VisionActivity.this);
-                builder
-                        .setMessage(R.string.dialog_select_prompt)
-                        .setPositiveButton(R.string.dialog_select_gallery, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startGalleryChooser();
-                            }
-                        })
-                        .setNegativeButton(R.string.dialog_select_camera, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                builder.create().show();
-            }
-        });*/
-
         mImageDetails = (TextView) findViewById(R.id.image_details);
         mMainImage = (ImageView) findViewById(R.id.main_image);
         startCamera();
@@ -312,7 +233,6 @@ public class VisionActivity extends AppCompatActivity {
             }
 
             protected void onPostExecute(String result) {
-                //mImageDetails.setText(result);  //받아온 string message 화면에 출력해주는거. 현재 굳이 필요없음.
                 startCamera();
             }
         }.execute();
@@ -352,9 +272,6 @@ public class VisionActivity extends AppCompatActivity {
         } else {
             message += "nothing";
         }
-
-        //테스트용
-
         return message;
     }
 
@@ -362,7 +279,6 @@ public class VisionActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String[]... strings) {
-            //여기서 서버에 요청
             APIExamTTS.main(mTextString, getFilesDir());
             return null;
         }
