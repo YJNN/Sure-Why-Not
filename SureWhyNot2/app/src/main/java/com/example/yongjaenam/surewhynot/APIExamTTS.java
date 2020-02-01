@@ -14,18 +14,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-// 네이버 음성합성 Open API 예제
-//네트워크 접속을 사용시 AsyncTask(즉 쓰레드)를 사용해야함.
-
 public class APIExamTTS {
-
     private static String TAG = "APIExamTTS";
-
     public static void main(String[] args, File adress) {
-        String clientId = "BbPf0f_eKv3pkZRTJNNS";//애플리케이션 클라이언트 아이디값";
-        String clientSecret = "ibRSw90WKs";//애플리케이션 클라이언트 시크릿값";
+        String clientId = "BbPf0f_eKv3pkZRTJNNS";
+        String clientSecret = "ibRSw90WKs";
         try {
-            String text = URLEncoder.encode(args[0], "UTF-8"); // 13자
+            String text = URLEncoder.encode(args[0], "UTF-8");
             String apiURL = "https://openapi.naver.com/v1/voice/tts.bin";
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -43,16 +38,14 @@ public class APIExamTTS {
             wr.close();
             int responseCode = con.getResponseCode();
             BufferedReader br;
-            if(responseCode==200) { // 정상 호출
+            if(responseCode==200) { 
                 InputStream is = con.getInputStream();
                 int read = 0;
                 byte[] bytes = new byte[1024];
-
                 File dir = new File(adress +"/", "Naver");
                 if(!dir.exists()){
                     dir.mkdirs();
                 }
-                // 랜덤한 이름으로 mp3 파일 생성
                 //String tempname = Long.valueOf(new Date().getTime()).toString();
                 String tempname = "naverttstemp"; //하나의 파일명으로 덮어쓰기
                 File f = new File(adress + File.separator + "Naver/" + tempname + ".mp3");
@@ -66,13 +59,9 @@ public class APIExamTTS {
                 String Path_to_file = adress+File.separator+"Naver/"+tempname+".mp3";
                 MediaPlayer audioPlay = new MediaPlayer();
                 audioPlay.setDataSource(Path_to_file);
-                audioPlay.prepare();//없으면 에러
+                audioPlay.prepare();
                 audioPlay.start();
-
-
-
-
-            } else {  // 에러 발생
+            } else { 
                 br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
