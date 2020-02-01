@@ -11,7 +11,6 @@ public class Choice extends AppCompatActivity{
     //private long mShakeTime;
     //private static final int SHAKE_SKIP_TIME = 500;
     //private static final float SHAKE_THRESHOLD_GRAVITY = 2.7f;
-
     private NaverTTSTask mNaverTTSTask;
     String[] mTextString;
 
@@ -27,10 +26,8 @@ public class Choice extends AppCompatActivity{
     }
 
     private class NaverTTSTask extends AsyncTask<String[], Void, String> {
-
         @Override
         protected String doInBackground(String[]... strings) {
-            //여기서 서버에 요청
             APIExamTTS.main(mTextString, getFilesDir());
             return null;
         }
@@ -55,7 +52,4 @@ public class Choice extends AppCompatActivity{
         return true;
         //return super.onKeyDown(keyCode, event);
     }
-
-
-
 }
